@@ -5,9 +5,6 @@ import jsonschema
 
 class TestSuit:
 
-
-
-
     def test_base(self):
         json_schema = {
             "$schema": "http://json-schema.org/draft-04/schema#",
@@ -33,6 +30,10 @@ class TestSuit:
         response_json = json.loads(response)
         assert (response.status_code == 200)
         assert (jsonschema.validate(response_json, json_schema))
+
+        assert (response.json()['name'] == 'testName')
+        assert (response.json()['count' == 1])
+        assert (response.json()['priority'] == True)
 
 
     def test_add_one(self):
@@ -62,3 +63,7 @@ class TestSuit:
         response_json = json.loads(response)
         assert (response.status_code == 201)
         assert (jsonschema.validate(response_json, json_schema))
+
+        assert (response.json()['testId'] == 1)
+        assert (response.json()['testType'] == 'auto')
+        assert (response.json()['log'] == True)
